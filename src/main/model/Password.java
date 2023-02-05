@@ -1,5 +1,6 @@
 package model;
 
+// password class
 public class Password {
     // Attributes
     String pw;

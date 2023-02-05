@@ -7,10 +7,18 @@ import java.util.*;
 public class PasswordGenerator {
 
     // set up
-    private Scanner sc = new Scanner(System.in);
-    private List<String> list = new ArrayList<>();
-    private Random number = new Random();
+    private Scanner input;
+    private List<String> list;
+    private Random number;
 
+    public PasswordGenerator() {
+        input = new Scanner(System.in);
+        list = new ArrayList<>();
+        number = new Random();
+        runPasswordGenerator();
+    }
+
+    // run the passwordGenerator
     public void runPasswordGenerator() {
         // arrays of characters
         String[] list1 = {"1", "2", "3", "4", "5" , "6", "7", "8", "9", "0"}; // difficulty level: 1
@@ -26,10 +34,10 @@ public class PasswordGenerator {
                 "?"};                                               // difficulty level: 4
 
         // selecting the size and difficulty of the password
-        System.out.print("Type in the size of the password: ");
-        int size = sc.nextInt();
+        System.out.print("Type in the length of the password: ");
+        int size = input.nextInt();
         System.out.print("Type in the difficulty of the password (level 1-4): ");
-        int difficulty = sc.nextInt();
+        int difficulty = input.nextInt();
 
         Password pw = new Password(size, difficulty);
 
