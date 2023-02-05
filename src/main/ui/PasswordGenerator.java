@@ -10,7 +10,8 @@ public class PasswordGenerator {
     private final Scanner input;          // getting input from user
     private final List<String> list;      // list of characters to build the password
     private final Random number;          // generate random number
-    private int size;               // size of the password
+    private int size = 0;               // size of the password
+    private int difficulty;
     private Password pw;            // the password
     private String[] list1;         // lists with numbers only
     private String[] list2;         // numbers and lowercase
@@ -29,14 +30,9 @@ public class PasswordGenerator {
         // make arrays of string for different difficulty of the password
         constructLists();
 
-        // selecting the size and difficulty of the password
-        System.out.print("Type in the length of the password: ");
-        size = input.nextInt();
-        System.out.print("Type in the difficulty of the password (level 1-4): ");
-        // difficulty of the password (only 1-4)
-        int difficulty = input.nextInt();
-
-        pw = new Password(size, difficulty);
+        // getting info for the password from user
+        getSizeOfPassword();
+        getDifficultyOfPassword();
 
         // selecting the difficulty
         passwordDifficulty(difficulty);
@@ -46,6 +42,39 @@ public class PasswordGenerator {
     }
 
     // helper methods
+
+    // get size of the password from user
+    private void getSizeOfPassword() {
+        while (size < 1) {
+            try {
+                // selecting the size and difficulty of the password
+                System.out.print("Type in the length of the password: ");
+                size = input.nextInt();
+                if (size < 1) {
+                    throw new Exception();
+                }
+            } catch (Exception exception) {
+                System.out.println("Size cannot be less than or equals to 0!!!");
+            }
+        }
+    }
+
+    // get difficulty of password
+    private void getDifficultyOfPassword() {
+        while (difficulty < 1 || difficulty > 4) {
+            try {
+                // difficulty of the password (only 1-4)
+                System.out.print("Type in the difficulty of the password (level 1-4): ");
+                difficulty = input.nextInt();
+                if (difficulty < 1 || difficulty > 4) {
+                    throw new Exception();
+                }
+                pw = new Password(size, difficulty);
+            } catch (Exception exception) {
+                System.out.println("Difficulty is out of range!!!");
+            }
+        }
+    }
 
     // creating arrays of strings for user to choose
     private void constructLists() {
@@ -98,6 +127,14 @@ public class PasswordGenerator {
             for (int i = 0; i < size; i++)
                 pw.buildPW(list.get(number.nextInt(list.size())));
         }
+    }
+
+    private void newPassword() {
+
+    }
+
+    private void quit(String s) {
+
     }
 
 
