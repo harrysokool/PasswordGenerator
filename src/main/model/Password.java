@@ -7,6 +7,11 @@ public class Password {
     int size;
     int difficulty;
 
+    public Password() {
+        this.pw = "";
+        this.size = 0;
+        this.difficulty = 0;
+    }
     public Password(int size, int difficulty) {
         this.pw = "";
         this.size = size;
@@ -18,7 +23,7 @@ public class Password {
     }
 
     public void showPW() {
-        System.out.println(pw);
+        System.out.println("Your Password: " + pw);
     }
 
 

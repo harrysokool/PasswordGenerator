@@ -11,12 +11,13 @@ public class PasswordGenerator {
     private final List<String> list;      // list of characters to build the password
     private final Random number;          // generate random number
     private int size = 0;               // size of the password
-    private int difficulty;
+    private int difficulty = 0;
     private Password pw;            // the password
     private String[] list1;         // lists with numbers only
     private String[] list2;         // numbers and lowercase
     private String[] list3;         // numbers, lowercase, uppercase
     private String[] list4;         // numbers, lowercase, uppercase and symbols
+    private boolean run;
 
     public PasswordGenerator() {
         input = new Scanner(System.in);
@@ -27,18 +28,32 @@ public class PasswordGenerator {
 
     // run the passwordGenerator
     public void runPasswordGenerator() {
-        // make arrays of string for different difficulty of the password
-        constructLists();
+        System.out.println("Welcome to Password Generator.");
+        run = true;
+        while (run) {
 
-        // getting info for the password from user
-        getSizeOfPassword();
-        getDifficultyOfPassword();
+            // initialize
+            pw = new Password();
+            size = 0;
+            difficulty = 0;
 
-        // selecting the difficulty
-        passwordDifficulty(difficulty);
+            // make arrays of string for different difficulty of the password
+            constructLists();
 
-        // printing out the password
-        pw.showPW();
+            // getting info for the password from user
+            getSizeOfPassword();
+            getDifficultyOfPassword();
+
+            // selecting the difficulty
+            passwordDifficulty(difficulty);
+
+            // printing out the password
+            pw.showPW();
+
+            // quit or continue
+            quitOrContinue();
+
+        }
     }
 
     // helper methods
@@ -129,13 +144,14 @@ public class PasswordGenerator {
         }
     }
 
-    private void newPassword() {
+    private void quitOrContinue() {
+        System.out.println("Enter q to quit.");
+        System.out.println("Enter anything for generating new password.");
+        String quit = input.next();
 
+        if (quit.equals("q")) {
+            run = false;
+            System.out.println("Thank you for using the password generator.");
+        }
     }
-
-    private void quit(String s) {
-
-    }
-
-
 }
